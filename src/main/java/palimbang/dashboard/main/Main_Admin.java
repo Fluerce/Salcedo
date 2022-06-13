@@ -2,6 +2,7 @@ package palimbang.dashboard.main;
 
 import palimbang.dashboard.event.EventMenuSelected;
 import java.awt.Color;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -88,6 +89,8 @@ public class Main_Admin extends javax.swing.JFrame {
                             m.setLocationRelativeTo(null);
                         } catch (SQLException ex) {
                             Logger.getLogger(Main_Employee.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (URISyntaxException ex) {
+                            Logger.getLogger(Main_Admin.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 }
@@ -235,7 +238,9 @@ public class Main_Admin extends javax.swing.JFrame {
                             m.setLocationRelativeTo(null);
                         } catch (SQLException e) {
                             e.printStackTrace();
-                        }
+                        } catch (URISyntaxException ex) {
+                Logger.getLogger(Main_Admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
                     }
     }//GEN-LAST:event_delButtonActionPerformed
 

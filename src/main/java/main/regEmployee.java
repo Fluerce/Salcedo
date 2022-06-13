@@ -1,5 +1,6 @@
 package main;
 
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,20 +26,19 @@ import javax.swing.JOptionPane;
 
 public class regEmployee extends javax.swing.JFrame {
 
-    
-    public regEmployee() throws SQLException {
-        initComponents();
-        // get original password field character
-        passChar = passField.getEchoChar();
-    }
-
     int xMouse = 0, yMouse = 0;
     DBConnect dc = new DBConnect();
-    Connection conn = dc.dbCheck();
+    Connection conn;
     final String TABLE_NAME = "UserTable";
     String gender = "";
     char passChar;
     
+    public regEmployee() throws SQLException, URISyntaxException {
+        initComponents();
+        conn = dc.dbCheck();
+        passChar = passField.getEchoChar();
+    }
+
     // Method to check if any field on the register form is empty
     protected boolean isFieldEmpty(String a, String b, String c, String d, String e, String f, String g, String h, String i, String j){
         boolean emp = false;
@@ -528,7 +528,7 @@ public class regEmployee extends javax.swing.JFrame {
                 Main m = new Main();
                 m.setVisible(true);
                 m.setLocationRelativeTo(null);
-            } catch (SQLException ex) {
+            } catch (SQLException | URISyntaxException ex) {
                 Logger.getLogger(regEmployee.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -612,6 +612,8 @@ public class regEmployee extends javax.swing.JFrame {
                                     m.setLocationRelativeTo(null);
                                 } catch (SQLException e) {
                                     e.printStackTrace();
+                                } catch (URISyntaxException ex) {
+                                    Logger.getLogger(regEmployee.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
                         }
@@ -640,7 +642,7 @@ public class regEmployee extends javax.swing.JFrame {
             Main m = new Main();
             m.setVisible(true);
             m.setLocationRelativeTo(null);
-        } catch (SQLException ex) {
+        } catch (SQLException | URISyntaxException ex) {
             Logger.getLogger(regEmployee.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_backLabelMouseClicked

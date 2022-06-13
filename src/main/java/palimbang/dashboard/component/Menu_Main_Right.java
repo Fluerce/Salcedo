@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -284,6 +285,8 @@ public class Menu_Main_Right extends javax.swing.JPanel {
             re.setLocationRelativeTo(null);
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(Menu_Main_Right.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_regLabelMouseClicked
 

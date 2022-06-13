@@ -2,6 +2,7 @@ package palimbang.dashboard.main;
 
 import palimbang.dashboard.event.EventMenuSelected;
 import java.awt.Color;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -70,6 +71,8 @@ public class Main_Employee extends javax.swing.JFrame {
                             m.setVisible(true);
                             m.setLocationRelativeTo(null);
                         } catch (SQLException ex) {
+                            Logger.getLogger(Main_Employee.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (URISyntaxException ex) {
                             Logger.getLogger(Main_Employee.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }

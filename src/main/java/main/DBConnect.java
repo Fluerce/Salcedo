@@ -1,54 +1,23 @@
 package main;
-// 4 SQL method imports + io.File for checking if DB Exists
-import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DBConnect {
     
-	public Connection dbCheck() throws SQLException{
-            
-		// Initialize DB path
-		File file = new File ("resources/test.db");
-		
-		// No DB? Create
-		if(!file.exists()) {
-			
-			try {
-                            Class.forName("org.sqlite.JDBC");
-                            Connection conn = DriverManager.getConnection("jdbc:sqlite:resources/test.db");
+//    public Connection dbCheck() throws URISyntaxException, SQLException {
+//        String dbUrl = System.getenv("JDBC_DATABASE_URL");
+//        return DriverManager.getConnection(dbUrl);
+//    }
+    
+    public Connection dbCheck() throws URISyntaxException, SQLException {
+        URI dbUri = new URI("postgres://aclqhtkyrjquay:b56c9bff730cdd8f27ee48ca4cb6138b4919229436f3ee3d6a877f7af96d1220@ec2-54-157-16-196.compute-1.amazonaws.com:5432/d169u3kp59punn");
 
-                            //Add methods for creating all tables here. Preferably a different class for recycling purposes
-                            DBQueries query = new DBQueries();
-                            query.createTables(conn);
-		        
-		        return conn;
-		    } catch ( Exception e ) {
-		        e.printStackTrace();
-		        System.exit(0);
-                        //System.out.println("Exception");
-		    }   
-			
-			// return statement will never reach here unless errors.
-		    return null;
-		    
-		// Yes DB? Connect    
-		} else {	
-			try {
-				return DriverManager.getConnection("jdbc:sqlite:resources/test.db");
-				
-		    } catch ( Exception e ) {
-		        e.printStackTrace();
-		        System.exit(0);
-		    }
-			
-			// return statement will never reach here unless errors.
-			return null;
-		}
-	}
-	
-	
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+        return DriverManager.getConnection(dbUrl, username, password);
+    }
 }
